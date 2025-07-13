@@ -1,17 +1,17 @@
 # Estimation of Spin Observable using Bootstrap Particle Filtering
 
-This repository contains the document and MATLAB codes for estimating the spin observable \( \langle \sigma_x \rangle \) of a two-level quantum system undergoing Rabi oscillations, using the Bootstrap Particle Filter. The project addresses noisy measurements with Gaussian noise and random outliers, as described in the document "Estimation of Spin Observable using Particle Filtering."
+This repository contains the document and MATLAB codes for estimating the spin observable of a two-level quantum system undergoing Rabi oscillations, using the Bootstrap Particle Filter. The project addresses noisy measurements with Gaussian noise and random outliers, as described in the document "Estimation of Spin Observable using Particle Filtering."
 
 ## Overview
 
-The document presents an application of the Bootstrap Particle Filter to track the spin observable \( \langle \sigma_x \rangle \) in a two-level spin-1/2 system, governed by a time-independent Hamiltonian in the rotating frame. The MATLAB code implements the simulation of quantum state evolution, noisy measurement generation, and the BPF algorithm, including importance sampling, resampling, and Roulette Wheel selection. The results demonstrate robust estimation with root mean square errors (RMSE) of 0.08, 0.10, and 0.14 for detuning parameters \( \Delta \omega = \omega_0 \), \( 0.5\omega_0 \), and \( 0.1\omega_0 \), respectively.
+The document presents an application of the Bootstrap Particle Filter to track the spin observable in a two-level spin-1/2 system, governed by a time-independent Hamiltonian in the rotating frame. The MATLAB code implements the simulation of quantum state evolution, noisy measurement generation, and the BPF algorithm, including importance sampling, resampling, and Roulette Wheel selection. The results demonstrate robust estimation with root mean square errors (RMSE) of 0.08, 0.10, and 0.14 for detuning parameters \( \Delta \omega = \omega_0 \), \( 0.5\omega_0 \), and \( 0.1\omega_0 \), respectively.
 
 ## Repository Contents
 
 - **Document**: `Particle_filtering.pdf` - The full document detailing the problem, methodology, and results.
 - **MATLAB Code**:
   - `simulate_data.m`: Simulates the quantum state evolution and generates noisy measurements with Gaussian noise and random outliers.
-  - `particle_filter.m`: Implements the main BPF algorithm for estimating \( \langle S_x \rangle \).
+  - `particle_filter.m`: Implements the main BPF algorithm for estimating spin observable.
   - `importance_sampling.m`: Updates particle weights based on the measurement model (Gaussian and uniform noise).
   - `resample.m`: Performs resampling to mitigate particle degeneracy.
   - `roulette_wheel.m`: Implements Roulette Wheel selection for sampling indices.
