@@ -5,7 +5,7 @@
 % measurement noise in that case, when the sensor does not work it returns
 % a random measurement outcome uniformly distributed between [lb,ub]
 
-function [SX, W] = ImpSamplingBootstrap( PrevSample, N, U_DT, meas_related, k)
+function [SX, W] = importance_sampling( PrevSample, N, U_DT, meas_related, k)
 
 
 sx =[0 1;1 0];
@@ -18,7 +18,7 @@ sx =[0 1;1 0];
 SX =  PrevSample; %%% Sample at k-1
 
 
-%%%% New samples according to posteriror distribution X_k^(i) ~ P(X_k | X_{k-1}^(i) )   
+%%%% Propagate sample through the state dynamics    
 
 
 for ii = 1: N
@@ -34,21 +34,6 @@ SX = SX_new;
 clear SX_new
 
 
-
-% % Propagate through the dynamic model
-% 
-% DT  = 0.01; g = 9.81;
-% SX = [SX(1,:)+SX(2,:)*DT; SX(2,:)-g*sin(SX(1,:))*DT];
-% 
-% 
-% QL = chol(Cov,'lower');
-% 
-%         % Add the process noise
-%         SX = SX + QL * randn(size(SX));
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%% Weight update part
 
 meas_data = meas_related{1};
@@ -61,7 +46,7 @@ MeasCov = meas_related{5};
 
 Prob = [Meas_prob, 1 - Meas_prob];
 
-sample = Roulette_Wheel(Prob,N);
+sample = roulette_wheel(Prob,N);
 
 
 
