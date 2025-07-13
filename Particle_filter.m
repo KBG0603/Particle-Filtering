@@ -1,13 +1,13 @@
 % Hamiltonian-based Noisy SHO Estimation with Particle Filter
 clear all; close all;
 
-Hamiltonian_spin_data;
+simulate_data;
 
 
 % Parameters
 N = 10000;
 
-Q = 0.05;
+Q = 0.05; % variance of the initial state preparation
 
 meas_related{1} = Y;
 meas_related{2} = cp;
@@ -32,7 +32,7 @@ end
 
 
 
-%SX = gauss_rnd(ket_0, Q, N);
+
 
 % Particle Filtering
 MM = zeros(1, length(Y));
@@ -40,13 +40,13 @@ MM = zeros(1, length(Y));
 
 for k = 1:length(Y)
 
-    [SX, W] = ImpSampleBootStrap_2( SX, N, U_DT, meas_related, k);
+    [SX, W] = importance_sampling( SX, N, U_DT, meas_related, k);
 
 
     % Resampling
 
 
-    [SX, new_weight] = Resample_Kaumudi(W,SX);
+    [SX, new_weight] = resample(W,SX);
 
     Y_est = zeros(1,N);
     for iter = 1:N
@@ -76,9 +76,3 @@ fprintf('RMSE of Particle Filter: %.2f\n', rmse);
 
 saveas(gcf, 'SpinObservable_0_1w0.svg');
 
-% % Custom gauss_rnd function
-% function X = gauss_rnd(m, P, N)
-% L = chol(P, 'lower');
-% Z = randn(length(m), N);
-% X = repmat(m, 1, N) + L * Z;
-% end
