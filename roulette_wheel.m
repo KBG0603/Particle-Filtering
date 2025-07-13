@@ -3,7 +3,7 @@
 
 %%% Given a discrete Probability distribution 'Prob', the function returns N samples 
 
-function y = Roulette_Wheel(Prob , N)
+function y = roulette_wheel(Prob , N)
 
 %Cumulative distribution
 A  = cumsum(Prob);
